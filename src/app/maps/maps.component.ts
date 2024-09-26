@@ -13,7 +13,7 @@ import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css';
   styleUrl: './maps.component.scss'
 })
 export class MapsComponent {
-  map: mapboxgl.Map | undefined;
+  map !: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
   lat = 37.75;
   lng = -122.41;
@@ -22,13 +22,9 @@ export class MapsComponent {
 
   ngOnInit() {
     mapboxgl.accessToken = environment.map.token;
-    this.map = new mapboxgl.Map({
-      container: 'map',
-      style: this.style,
-      zoom: 13,
-      center: [this.lng, this.lat],
-      attributionControl: false
-    });
+
+    this.initilizeMap(this.lng, this.lat)
+
     // Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
     this.map.addControl(new mapboxgl.AttributionControl({
@@ -51,11 +47,28 @@ export class MapsComponent {
     this.map.addControl(this.directions, 'top-left');
   }
 
+  initilizeMap(long: number, lat: number) {
+    this.map = new mapboxgl.Map({
+      container: 'map',
+      style: this.style,
+      zoom: 13,
+      center: [long, lat],
+      attributionControl: false
+    });
+  }
+
   locateMe() {
-    navigator.geolocation.getCurrentPosition((success) => {
+    navigator.geolocation.getCurrentPosition((location: GeolocationPosition) => {
+      const coordsArr: any = [location.coords.longitude, location.coords.latitude]
+      this.map.setCenter(coordsArr)
+      // Add a marker at the new center
+      const marker = new mapboxgl
+        .Marker({ color: 'red' }) // Create a new marker with specified color
+        .setLngLat(coordsArr) // Set marker location to [longitude, latitude]
+        .addTo(this.map) // Add marker to the map
 
     }, err => {
 
-    })
+    }, { enableHighAccuracy: true })
   }
 }
