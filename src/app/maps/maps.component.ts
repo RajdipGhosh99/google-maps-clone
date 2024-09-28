@@ -4,6 +4,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css';
+import { MapboxStyleSwitcherControl } from "mapbox-gl-style-switcher";
 
 @Component({
   selector: 'app-maps',
@@ -18,6 +19,9 @@ export class MapsComponent {
   lat = 37.75;
   lng = -122.41;
   directions: any;
+  markers: mapboxgl.Marker[] = []
+  currentLocation!: mapboxgl.Marker
+
   constructor() { }
 
   ngOnInit() {
@@ -45,6 +49,7 @@ export class MapsComponent {
 
     // Add the directions control to the map
     this.map.addControl(this.directions, 'top-left');
+    // this.map.addControl(new MapboxStyleSwitcherControl());
   }
 
   initilizeMap(long: number, lat: number) {
@@ -61,8 +66,8 @@ export class MapsComponent {
     navigator.geolocation.getCurrentPosition((location: GeolocationPosition) => {
       const coordsArr: any = [location.coords.longitude, location.coords.latitude]
       this.map.setCenter(coordsArr)
-      // Add a marker at the new center
-      const marker = new mapboxgl
+      if (this.currentLocation) this.currentLocation.remove()
+      this.currentLocation = new mapboxgl
         .Marker({ color: 'red' }) // Create a new marker with specified color
         .setLngLat(coordsArr) // Set marker location to [longitude, latitude]
         .addTo(this.map) // Add marker to the map

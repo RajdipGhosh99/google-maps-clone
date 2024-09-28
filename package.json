@@ -20,6 +20,7 @@
     "@angular/router": "^18.2.0",
     "@mapbox/mapbox-gl-directions": "^4.1.1",
     "mapbox-gl": "^3.6.0",
+    "mapbox-gl-style-switcher": "^1.0.11",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
