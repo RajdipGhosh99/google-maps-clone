@@ -5,6 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css';
 import { MapboxStyleSwitcherControl } from "mapbox-gl-style-switcher";
+import "mapbox-gl-style-switcher/styles.css"
 
 @Component({
   selector: 'app-maps',
@@ -49,7 +50,9 @@ export class MapsComponent {
 
     // Add the directions control to the map
     this.map.addControl(this.directions, 'top-left');
-    // this.map.addControl(new MapboxStyleSwitcherControl());
+    const switcherControl: any = new MapboxStyleSwitcherControl()
+    this.map.addControl(switcherControl);
+
   }
 
   initilizeMap(long: number, lat: number) {
