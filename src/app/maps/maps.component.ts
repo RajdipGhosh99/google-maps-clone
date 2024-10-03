@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import { environment } from '../../environments/environment';
 import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
-import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css';
 import { MapboxStyleSwitcherControl } from "mapbox-gl-style-switcher";
-import "mapbox-gl-style-switcher/styles.css"
-import MapboxDraw from '@mapbox/mapbox-gl-draw';
-import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import * as turf from '@turf/turf';
 import { MapEventType } from 'mapbox-gl';
+import MapboxDraw from '@mapbox/mapbox-gl-draw';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
+import 'mapbox-gl/dist/mapbox-gl.css';
+import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css';
+import "mapbox-gl-style-switcher/styles.css"
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css';
 
 @Component({
@@ -37,7 +38,13 @@ export class MapsComponent {
   ngOnInit() {
     mapboxgl.accessToken = environment.map.token;
 
-    this.initilizeMap(this.lng, this.lat)
+    this.map = new mapboxgl.Map({
+      container: 'map',
+      style: this.style,
+      zoom: 13,
+      center: [this.lng, this.lat],
+      attributionControl: false
+    });
 
     // Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
@@ -95,15 +102,6 @@ export class MapsComponent {
 
   }
 
-  initilizeMap(long: number, lat: number) {
-    this.map = new mapboxgl.Map({
-      container: 'map',
-      style: this.style,
-      zoom: 13,
-      center: [long, lat],
-      attributionControl: false
-    });
-  }
 
   locateMe() {
     navigator.geolocation.getCurrentPosition((location: GeolocationPosition) => {

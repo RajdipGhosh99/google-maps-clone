@@ -35,7 +35,9 @@
               "src/styles.scss",
               "mapbox-gl/dist/mapbox-gl.css",
               "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css",
-              "mapbox-gl-style-switcher/styles.css"
+              "mapbox-gl-style-switcher/styles.css",
+              "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css",
+              "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css"
             ],
             "scripts": []
           },
