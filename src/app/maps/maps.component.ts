@@ -12,6 +12,7 @@ import * as turf from '@turf/turf';
 import { MapEventType } from 'mapbox-gl';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css';
 
 @Component({
   selector: 'app-maps',
