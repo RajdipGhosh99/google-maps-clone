@@ -1,3 +1,15 @@
 .root {
     box-sizing: border-box;
+
+    .active {
+        background: white;
+        border-radius: 9999px;
+        color: #63b3ed;
+        font-weight: 500;
+    }
+}
+
+
+::ng-deep .mapboxgl-ctrl-bottom-left {
+    display: none !important;
 }

@@ -1,7 +1,19 @@
 <div class="root h-screen relative root">
+    <div
+        class="absolute top-3 right-12 z-50 bg-gray-200 text-sm text-gray-500 leading-none border-2 border-gray-200 rounded-full inline-flex">
+        <button (click)="toggle(1)"
+            class="inline-flex items-center transition-colors duration-300 ease-in focus:outline-none hover:text-blue-400 focus:text-blue-400 rounded-l-full px-4 py-2"
+            [ngClass]="mapMode==1?'active':null" id="grid">
+            <span>Direction</span>
+        </button>
+        <button (click)="toggle(2)" [ngClass]="mapMode==2?'active':null"
+            class="inline-flex items-center transition-colors duration-300 ease-in focus:outline-none hover:text-blue-400 focus:text-blue-400 rounded-r-full px-4 py-2"
+            id="list">
+            <span>Draw</span>
+        </button>
+    </div>
 
     <div class="map" id="map" class="w-full h-full"></div>
-
 
     <div class="locate-me-root absolute z-50 bottom-8 right-5 p-1 bg-slate-500 rounded-md cursor-pointer"
         (click)="locateMe()">
